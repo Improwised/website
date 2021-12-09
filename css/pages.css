@@ -1,0 +1,132 @@
+/* careers - start */
+
+.careers .heroUnit {
+  display: flex;
+  min-height: 500px;
+  position: relative;
+  align-items: center;
+  background: url(../careers.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.careers .label {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: normal;
+  text-transform: lowercase;
+  height: auto;
+  min-width: auto;
+  padding: 5px 10px;
+  border-radius: 5px;
+  line-height: 1;
+}
+
+.career {
+  font-size: 18px;
+}
+
+.career .jobPosition li {
+  margin-bottom: 0px;
+}
+
+.about-us .heroUnit {
+  display: flex;
+  min-height: 500px;
+  position: relative;
+  align-items: center;
+  background: url(../about.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin-bottom: 7.42857143em;
+}
+
+.case-studies .heroUnit {
+  display: flex;
+  min-height: 500px;
+  position: relative;
+  align-items: center;
+  background: url(../case-studies.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin-bottom: 7.42857143em;
+}
+
+.case-studies .card-container .imageblock {
+  margin-bottom: 7.42857143em;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 6px;
+}
+
+.case-studies .card-container .imageblock .background-image-holder {
+  border-radius: 6px;
+}
+
+.case-studies .card-container .card-content {
+  padding: 5rem;
+}
+
+.switchable .currentOpening div[class*='col-']:last-child {
+  float: left;
+}
+
+#errorMessages {
+  display: none;
+  margin: 0 10px 15px 10px;
+  padding: 8px 35px 8px 30px;
+  color: #B94A48;
+  background-color: #F2DEDE;
+  border: 2px solid #EED3D7;
+  border-radius: 4px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+#success {
+  display: none;
+}
+
+.success-msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+}
+
+.success-msg {
+  color: #270;
+  background-color: #DFF2BF;
+}
+
+@media screen and (max-width: 991px) {
+  .careers .heroUnit,
+  .about-us .heroUnit,
+  .case-studies .heroUnit {
+    min-height: auto;
+  }
+
+  .case-studies .card-container .card-content {
+    padding: 2rem;
+  }
+}
+
+.teamMarquee {
+  overflow: hidden;
+}
+
+.teamMarquee div {
+  height: 450px;
+  width: 6143px;
+  animation: slide 100s linear infinite;
+  background-image: url(../team.jpg);
+}
+
+@keyframes slide {
+  0%   {background-position: 0 0;}
+  100% {background-position: -6143px 0;}
+}
+
+/* careers - end */
+
+/* ========================================================================== */
