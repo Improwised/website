@@ -1,10 +1,11 @@
 @font-face {
-	font-family: 'iconsmind';
-	src:url('../fonts/iconsmind.eot?#iefix-rdmvgc') format('embedded-opentype');
-	src:url('../fonts/iconsmind.woff') format('woff'),
-		url('../fonts/iconsmind.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'iconsmind';
+  src:url('../fonts/iconsmind.eot?#iefix-rdmvgc') format('embedded-opentype');
+  src:url('../fonts/iconsmind.woff') format('woff'),
+  url('../fonts/iconsmind.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 [class^="icon-"], [class*=" icon-"] {
