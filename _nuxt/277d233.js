@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{250:function(e,t,n){"use strict";n.r(t);var c={layout:"theme",mounted:function(){window.location.href="/services/".concat(this.$slugify(this.$store.state.services[0].title))}},o=n(74),component=Object(o.a)(c,(function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",[e._v("services")])}),[],!1,null,null,null);t.default=component.exports}}]);
+//# sourceMappingURL=277d233.js.map
