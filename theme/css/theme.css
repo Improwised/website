@@ -414,7 +414,7 @@ img {
   margin-bottom: 1.85714286em;
 }
 /*p+img, img:last-child{
-	margin-bottom: 0;
+  margin-bottom: 0;
 }*/
 .img--fullwidth {
   width: 100%;
@@ -864,6 +864,7 @@ div[data-overlay] ul {
 }
 .btn.bg--facebook,
 .btn.bg--twitter,
+.btn.bg--linkedin,
 .btn.bg--instagram,
 .btn.bg--googleplus,
 .btn.bg--pinterest,
@@ -874,6 +875,7 @@ div[data-overlay] ul {
 }
 .btn.bg--facebook .btn__text,
 .btn.bg--twitter .btn__text,
+.btn.bg--linkedin .btn__text,
 .btn.bg--instagram .btn__text,
 .btn.bg--googleplus .btn__text,
 .btn.bg--pinterest .btn__text,
@@ -884,6 +886,7 @@ div[data-overlay] ul {
 }
 .btn.bg--facebook .btn__text i,
 .btn.bg--twitter .btn__text i,
+.btn.bg--linkedin .btn__text i,
 .btn.bg--instagram .btn__text i,
 .btn.bg--googleplus .btn__text i,
 .btn.bg--pinterest .btn__text i,
@@ -894,6 +897,7 @@ div[data-overlay] ul {
 }
 .btn.bg--facebook:hover,
 .btn.bg--twitter:hover,
+.btn.bg--linkedin:hover,
 .btn.bg--instagram:hover,
 .btn.bg--googleplus:hover,
 .btn.bg--pinterest:hover,
@@ -2878,6 +2882,9 @@ a {
 .image-bg:not(.image-light) *:not(a) {
   color: #fff;
 }
+.color--linkedin {
+  color: #007bb6;
+}
 .color--facebook {
   color: #3b5998;
 }
@@ -2901,6 +2908,10 @@ a {
 }
 .bg--facebook {
   background: #3b5998;
+  color: #fff;
+}
+.bg--linkedin {
+  background: #007bb6;
   color: #fff;
 }
 .bg--twitter {
@@ -6154,7 +6165,7 @@ a.block:hover > .feature {
   margin-bottom: 0.16666666666667em;
 }
 .feature-3 p {
-  min-height: 7.42857143em;
+  min-height: 5.42857143em;
 }
 .feature-4 .btn {
   position: absolute;
@@ -8347,6 +8358,7 @@ iframe[src*='google.com/maps'] {
 }
 .testimonial .testimonial__image {
   margin-bottom: 1.85714286em;
+  line-height: 1px;
 }
 @media all and (min-width: 1025px) {
   .testimonial-1 .switchable__text {
@@ -9375,3 +9387,20 @@ footer.footer-7 {
     margin-right: auto;
   }
 }
+.testimonial__body
+{
+  padding: 5px 5px 10px 5px;
+}
+.testimonial__body h5
+{
+  font-size: 18px;
+  line-height: 18px;
+  margin-bottom: 5px !important;
+  font-weight: normal;
+}
+.testimonial__body span
+{
+  font-size: 14px;
+  line-height: 20px;
+}
+.markdown-body  * { font-family: 'Helvetica', sans-serif; }
