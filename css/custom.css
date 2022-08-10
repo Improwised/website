@@ -118,6 +118,7 @@ body {
 }
 .case-block img {
   object-fit: cover;
+  width: 100%;
 }
 /* responsive */
 @media screen and (max-width: 1199px) {

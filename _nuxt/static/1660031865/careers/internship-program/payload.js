@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/careers/internship-program", {data:[{}],fetch:{},mutations:[]});
