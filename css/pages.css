@@ -101,17 +101,6 @@
   background-color: #DFF2BF;
 }
 
-@media screen and (max-width: 991px) {
-  .careers .heroUnit,
-  .about-us .heroUnit,
-  .case-studies .heroUnit {
-    min-height: auto;
-  }
-
-  .case-studies .card-container .card-content {
-    padding: 2rem;
-  }
-}
 
 .teamMarquee {
   overflow: hidden;
@@ -267,7 +256,7 @@
 .case-block .feature__body a
 {
     position: absolute;
-    bottom: 1px;
+    bottom: 12px;
 }
 .typed-element {
 
@@ -276,4 +265,17 @@
 .technologies .boxed:hover
 {
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+}
+
+/*Responsive*/
+@media screen and (max-width: 991px) {
+  .careers .heroUnit,
+  .about-us .heroUnit,
+  .case-studies .heroUnit {
+    min-height: auto;
+  }
+
+  .case-studies .card-container .card-content {
+    padding: 2rem;
+  }
 }

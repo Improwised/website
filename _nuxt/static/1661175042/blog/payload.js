@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/blog", {data:[{blogList:[],_img:{}}],fetch:{},mutations:[]});
