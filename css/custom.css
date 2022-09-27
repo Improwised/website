@@ -479,3 +479,20 @@ button[data-glide-dir="<"] {
     max-height: 100%;
 }
 }
+
+@media screen and (max-width: 992px) {
+  .md-order-2 {
+    order: 2;
+  }
+
+  .md-order-1 {
+    order: 1;
+  }
+}
+.card-img-top {
+  max-height: 300px;
+  min-height: 300px;
+  max-width: 459px;
+  min-width: 459px;
+  object-fit: cover;
+}
