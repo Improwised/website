@@ -496,3 +496,8 @@ button[data-glide-dir="<"] {
   min-width: 459px;
   object-fit: cover;
 }
+.teamicon
+{
+  color: #252525;
+  font-size: 12px;
+}

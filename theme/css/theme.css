@@ -1049,6 +1049,9 @@ div[data-overlay] ul {
   line-height: 1em;
   font-size: 3.14285714em;
 }
+.icon--small {
+  font-size: 14px;
+}
 .icon--xs {
   font-size: 1em;
 }
