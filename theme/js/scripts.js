@@ -14,7 +14,7 @@ mr = (function (mr, $, window, document){
     $(window).on("load", windowLoad);
 
     function documentReady(context){
-        
+
         context = typeof context === typeof undefined ? $ : context;
         components.documentReady.concat(components.documentReadyDeferred).forEach(function(component){
             component(context);
@@ -60,8 +60,8 @@ mr = (function (mr, $, window, document){
     "use strict";
     mr.util = {};
 
-    mr.util.requestAnimationFrame    = window.requestAnimationFrame || 
-                                       window.mozRequestAnimationFrame || 
+    mr.util.requestAnimationFrame    = window.requestAnimationFrame ||
+                                       window.mozRequestAnimationFrame ||
                                        window.webkitRequestAnimationFrame ||
                                        window.msRequestAnimationFrame;
 
@@ -114,48 +114,11 @@ mr = (function (mr, $, window, document){
           if (keyA > keyB) return order2;
           return 0;
         });
-        
+
         // Append back into place
         $parentElement.empty();
         $(items).each(function(i, itm){
           $parentElement.append(itm);
-        });
-    };
-    
-    // Set data-src attribute of element from src to be restored later
-    mr.util.idleSrc = function(context, selector){
-        
-            selector  = (typeof selector !== typeof undefined) ? selector : '';
-            var elems = context.is(selector+'[src]') ? context : context.find(selector+'[src]');
-
-        elems.each(function(index, elem){
-            elem           = $(elem);
-            var currentSrc = elem.attr('src'),
-                dataSrc    = elem.attr('data-src');
-
-            // If there is no data-src, save current source to it
-            if(typeof dataSrc === typeof undefined){
-                elem.attr('data-src', currentSrc);
-            }
-
-            // Clear the src attribute
-            elem.attr('src', '');    
-            
-        });
-    };
-
-    // Set src attribute of element from its data-src where it was temporarily stored earlier
-    mr.util.activateIdleSrc = function(context, selector){
-        
-        selector     = (typeof selector !== typeof undefined) ? selector : '';
-        var elems    = context.is(selector+'[data-src]') ? context : context.find(selector+'[data-src]');
-
-        elems.each(function(index, elem){
-            elem = $(elem);
-            var dataSrc    = elem.attr('data-src');
-
-            // Write the 'src' attribute using the 'data-src' value
-            elem.attr('src', dataSrc);
         });
     };
 
@@ -171,7 +134,7 @@ mr = (function (mr, $, window, document){
     // Take a text value in either px (eg. 150px) or vh (eg. 65vh) and return a number in pixels.
     mr.util.parsePixels = function(text){
         var windowHeight = $(window).height(), value;
-        
+
         // Text text against regular expression for px value.
         if(/^[1-9]{1}[0-9]*[p][x]$/.test(text)){
             return parseInt(text.replace('px', ''),10);
@@ -187,7 +150,7 @@ mr = (function (mr, $, window, document){
         }
     };
 
-    mr.util.removeHash = function() { 
+    mr.util.removeHash = function() {
         // Removes hash from URL bar without reloading and without losing search query
         history.pushState("", document.title, window.location.pathname + window.location.search);
     }
@@ -219,39 +182,39 @@ mr = (function (mr, $, window, document){
 mr = (function (mr, $, window, document){
     "use strict";
 
-    
+
     mr.scroll           = {};
-    var raf             = window.requestAnimationFrame || 
-                          window.mozRequestAnimationFrame || 
+    var raf             = window.requestAnimationFrame ||
+                          window.mozRequestAnimationFrame ||
                           window.webkitRequestAnimationFrame ||
                           window.msRequestAnimationFrame;
     mr.scroll.listeners = [];
     mr.scroll.busy      = false;
     mr.scroll.y         = 0;
     mr.scroll.x         = 0;
-    
+
     var documentReady = function($){
 
         //////////////// Capture Scroll Event and fire scroll function
-        jQuery(window).off('scroll.mr');    
+        jQuery(window).off('scroll.mr');
         jQuery(window).on('scroll.mr', function(evt) {
                 if(mr.scroll.busy === false){
-                    
+
                     mr.scroll.busy = true;
-                    raf(function(evt){  
+                    raf(function(evt){
                         mr.scroll.update(evt);
                     });
-                    
+
                 }
                 if(evt.stopPropagation){
                     evt.stopPropagation();
                 }
         });
-        
+
     };
 
     mr.scroll.update = function(event){
-        
+
         // Loop through all mr scroll listeners
         var parallax = typeof window.mr_parallax !== typeof undefined ? true : false;
         mr.scroll.y = (parallax ? mr_parallax.mr_getScrollPosition() : window.pageYOffset);
@@ -266,7 +229,7 @@ mr = (function (mr, $, window, document){
                mr.scroll.listeners[i](event);
             }
         }
-        
+
     };
 
     mr.scroll.documentReady = documentReady;
@@ -314,9 +277,9 @@ mr = (function (mr, $, window, document){
                     //console.log('Error - Scrollpoint not found.');
                     return false;
                 }
-            }   
+            }
         });
-        
+
         if(mr.scroll.classModifiers.rules.length){
             return true;
         }else{
@@ -329,12 +292,12 @@ mr = (function (mr, $, window, document){
             scrollRules   = mr.scroll.classModifiers.rules,
             l             = scrollRules.length,
             currentRule;
-        
-        // Given the current scrollPoint, check for necessary changes 
+
+        // Given the current scrollPoint, check for necessary changes
         while(l--) {
-            
+
             currentRule = scrollRules[l];
-            
+
             if(currentScroll > currentRule.scrollPoint && !currentRule.hasClass){
                 // Set local copy and glogal copy at the same time;
                 currentRule.element.classList.add(currentRule.toggleClass);
@@ -361,7 +324,7 @@ mr = (function (mr, $, window, document){
         // Each element has data-scroll-class with a formatted value to represent class to add/remove at a particular scroll point.
         $('[data-scroll-class]').each(function(){
             var element  = $(this);
-                
+
             // Test the rules to be added to an array of rules.
             if(!mr.scroll.classModifiers.parseScrollRules(element)){
                 console.log('Error parsing scroll rules on: '+element);
@@ -371,7 +334,7 @@ mr = (function (mr, $, window, document){
         // For 'position fixed' elements, give them a max-width for correct fixing behaviour
         fixedElementSizes();
         $(window).on('resize', fixedElementSizes);
-        
+
         // If there are valid scroll rules add classModifiers update function to the scroll event processing queue.
         if(mr.scroll.classModifiers.rules.length){
             mr.scroll.listeners.push(mr.scroll.classModifiers.update);
@@ -379,9 +342,9 @@ mr = (function (mr, $, window, document){
     };
 
     mr.components.documentReady.push(documentReady);
-    mr.scroll.classModifiers.documentReady = documentReady;    
+    mr.scroll.classModifiers.documentReady = documentReady;
 
-    
+
 
     return mr;
 
@@ -391,11 +354,11 @@ mr = (function (mr, $, window, document){
 //////////////// Backgrounds
 mr = (function (mr, $, window, document){
     "use strict";
-    
+
     mr.backgrounds = mr.backgrounds || {};
-    
+
     mr.backgrounds.documentReady = function($){
-        
+
         //////////////// Append .background-image-holder <img>'s as CSS backgrounds
 
 	    $('.background-image-holder').each(function() {
@@ -412,9 +375,9 @@ mr = (function (mr, $, window, document){
 //////////////// Bars
 mr = (function (mr, $, window, document){
     "use strict";
-    
+
     mr.bars = mr.bars || {};
-    
+
     mr.bars.documentReady = function($){
         $('.nav-container .bar[data-scroll-class*="fixed"]:not(.bar--absolute)').each(function(){
             var bar = $(this),
@@ -431,7 +394,7 @@ mr = (function (mr, $, window, document){
 //////////////// Cookies
 mr = (function (mr, $, window, document){
     "use strict";
-    
+
     mr.cookies = {
 
         getItem: function (sKey) {
@@ -480,11 +443,11 @@ mr = (function (mr, $, window, document){
 //////////////// Dropdowns
 mr = (function (mr, $, window, document){
     "use strict";
-    
+
     mr.dropdowns = mr.dropdowns || {};
 
     mr.dropdowns.done = false;
-    
+
     mr.dropdowns.documentReady = function($){
 
         var rtl = false;
@@ -518,8 +481,8 @@ mr = (function (mr, $, window, document){
             // Append a container to the body for measuring purposes
             jQuery('body').append('<div class="container containerMeasure" style="opacity:0;pointer-events:none;"></div>');
 
-            
-        
+
+
 
             // Menu dropdown positioning
             if(rtl === false){
@@ -540,19 +503,19 @@ mr = (function (mr, $, window, document){
 
                 jQuery(this).css('left', '');
 
-                container       = jQuery(this);  
+                container       = jQuery(this);
                 containerOffset = container.offset().left;
                 masterOffset    = jQuery('.containerMeasure').offset().left;
                 menuItem        = container.closest('.dropdown').offset().left;
                 content         = null;
-                
+
                 container.css('left',((-containerOffset)+(masterOffset)));
 
                 if(container.find('.dropdown__content:not([class*="lg-12"])').length){
                     content = container.find('.dropdown__content');
                     content.css('left', ((menuItem)-(masterOffset)));
                 }
-                
+
         });
         $('.dropdown__content').each(function(){
             var dropdown, offset, width, offsetRight, winWidth, leftCorrect;
@@ -577,7 +540,7 @@ mr = (function (mr, $, window, document){
 
         $('.dropdown__container').each(function(){
             var container, containerOffset, masterOffset, menuItem, content;
- 
+
                 jQuery(this).css('left', '');
 
                 container   = jQuery(this);
@@ -585,7 +548,7 @@ mr = (function (mr, $, window, document){
                 masterOffset    = jQuery('.containerMeasure').offset().left;
                 menuItem        = windowWidth - (container.closest('.dropdown').offset().left + container.closest('.dropdown').outerWidth(true));
                 content         = null;
-                
+
                 container.css('right',((-containerOffset)+(masterOffset)));
 
                 if(container.find('.dropdown__content:not([class*="lg-12"])').length){
@@ -609,7 +572,7 @@ mr = (function (mr, $, window, document){
 
         });
     };
-    
+
 
     mr.components.documentReady.push(mr.dropdowns.documentReady);
     return mr;
@@ -618,14 +581,14 @@ mr = (function (mr, $, window, document){
 //////////////// Toggle Class
 mr = (function (mr, $, window, document){
     "use strict";
-    
+
     mr.toggleClass = mr.toggleClass || {};
-    
+
     mr.toggleClass.documentReady = function($){
         $('[data-toggle-class]').each(function(){
         	var element = $(this),
                 data    = element.attr('data-toggle-class').split("|");
-        		
+
 
             $(data).each(function(){
                 var candidate     = element,
@@ -661,12 +624,12 @@ mr = (function (mr, $, window, document){
 //////////////// Parallax
 mr = (function (mr, $, window, document){
     "use strict";
-    
+
     mr.parallax = mr.parallax || {};
 
     mr.parallax.documentReady = function($){
-        
-        var $window      = $(window); 
+
+        var $window      = $(window);
         var windowWidth  = $window.width();
         var windowHeight = $window.height();
         var navHeight    = $('nav').outerHeight(true);
@@ -680,8 +643,8 @@ mr = (function (mr, $, window, document){
                 parallaxHeroImage.css('height', windowHeight + navHeight);
             }
         }
-    };     
-    
+    };
+
     mr.parallax.update = function(){
         if(typeof mr_parallax !== typeof undefined){
             mr_parallax.profileParallaxElements();
