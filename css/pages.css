@@ -172,6 +172,10 @@
   border-radius: 50%;
   width: 100%;
 }
+.blogdesc p
+{
+ margin-bottom: 10px;
+}
 .show-featured a:hover {
   text-decoration: none !important;
 }
