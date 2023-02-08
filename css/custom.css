@@ -501,3 +501,11 @@ button[data-glide-dir="<"] {
   color: #AFAFAF;
   font-size: 12px;
 }
+
+.blog-style pre {
+  padding: 0;
+}
+
+div.embedPastebin div.embedFooter {
+  display: none !important;
+}
