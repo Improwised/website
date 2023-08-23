@@ -108,6 +108,6 @@ function setInitial() {
   $('#success').css('display', 'none');
   $('#errorMessages ul').remove();
   $('#errorMessages').css('display', 'none');
-  $("#btn-submit").html('Send');
+  $("#btn-submit").html('Send Inquiry');
   $("#btn-submit").attr("disabled", true);
 }
