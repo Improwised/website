@@ -9419,3 +9419,7 @@ footer.footer-7 {
 .remove-height{
   line-height: 1.5;
 }
+
+.digitalocean-height{
+  line-height: 3;
+}
