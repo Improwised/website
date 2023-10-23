@@ -955,8 +955,8 @@ div[data-overlay] ul {
 }
 .btn--primary,
 .btn--primary:visited {
-  background: #4a90e2;
-  border-color: #4a90e2;
+  background: #0e68d3;
+  border-color: #0e68d3;
 }
 .btn--primary .btn__text,
 .btn--primary:visited .btn__text {
@@ -9407,3 +9407,15 @@ footer.footer-7 {
   line-height: 20px;
 }
 .markdown-body  * { font-family: 'Helvetica', sans-serif; }
+
+.feature .h4 {
+  margin-bottom: 0.342105263157895em;
+}
+
+.feature .h5 {
+  margin: 0;
+}
+
+.remove-height{
+  line-height: 1.5;
+}
