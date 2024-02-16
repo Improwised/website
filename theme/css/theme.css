@@ -9423,3 +9423,8 @@ footer.footer-7 {
 .digitalocean-height{
   line-height: 3;
 }
+
+#shadow-host-companion
+{
+  padding: 0;
+}
