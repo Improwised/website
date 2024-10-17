@@ -102,17 +102,6 @@
 }
 
 
-.teamMarquee {
-  overflow: hidden;
-}
-
-.teamMarquee div {
-  height: 450px;
-  width: 6143px;
-  animation: slide 100s linear infinite;
-  background-image: url(../team.jpg);
-}
-
 @keyframes slide {
   0%   {background-position: 0 0;}
   100% {background-position: -6143px 0;}

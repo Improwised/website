@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{531:function(n,t,e){"use strict";e.r(t);var l=e(45),component=Object(l.a)({},(function(){var n=this.$createElement;return(this._self._c||n)("Nuxt")}),[],!1,null,null,null);t.default=component.exports}}]);
-//# sourceMappingURL=3a4061e.js.map

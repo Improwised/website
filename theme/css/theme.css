@@ -5446,9 +5446,18 @@ body.dropdowns--hover .nav-sidebar-column .dropdown:hover > .dropdown__container
 .dropdown .dropdown__content > .pos-absolute[class*='col-'][data-overlay]:before {
   border-radius: 6px 0 0 6px;
 }
+
 .menu-horizontal > .dropdown > .dropdown__trigger:after {
-  content: '\e80a';
+  content: '';
   margin-left: 4px;
+  background-image: url('../../img/fonts/down-open.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 8px;
+  height: 8px; /* Adjust based on your SVG size */
+  display: inline-block;
+  position: relative;
+  bottom: 2px;
 }
 .menu-vertical > .dropdown > .dropdown__trigger {
   display: inline-block;
@@ -5823,15 +5832,7 @@ body.dropdowns--hover .nav-sidebar-column .dropdown:hover > .dropdown__container
 .imagebg .icon {
   color: #fff;
 }
-p .material-icons {
-  font-size: 1em;
-}
-p .material-icons:first-child {
-  margin-right: 0.30952381em;
-}
-.material-icons {
-  font-family: 'Material Icons' !important;
-}
+
 .icon-circle {
   position: relative;
   display: inline-block;
