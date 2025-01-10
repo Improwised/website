@@ -1,0 +1,287 @@
+<!doctype html>
+<html data-n-head-ssr lang="en" data-n-head="%7B%22lang%22:%7B%22ssr%22:%22en%22%7D%7D">
+  <head>
+    <title>Simplifying Ingress Management for Kubernetes: Deploying a Traefik Cluster with Automatic TLS | Improwised Technology</title><meta data-n-head="ssr" charset="utf-8"><meta data-n-head="ssr" http-equiv="Content-Language" content="en"><meta data-n-head="ssr" name="viewport" content="width=device-width,initial-scale=1"><meta data-n-head="ssr" name="format-detection" content="telephone=no"><meta data-n-head="ssr" name="author" content="Improwised Technologies Pvt. Ltd."><meta data-n-head="ssr" name="copyright" content="Improwised Technologies Pvt. Ltd."><meta data-n-head="ssr" name="robots" content="index, follow"><meta data-n-head="ssr" name="theme-color" content="#FFFFFF"><meta data-n-head="ssr" name="application-name" content="Improwised Technologies Pvt. Ltd."><meta data-n-head="ssr" name="msapplication-TileColor" content="#FFFFFF"><meta data-n-head="ssr" name="msapplication-TileImage" content="/img/favicon/mstile-144x144.png"><meta data-n-head="ssr" name="msapplication-square70x70logo" content="/img/favicon/mstile-70x70.png"><meta data-n-head="ssr" name="msapplication-square150x150logo" content="/img/favicon/mstile-150x150.png"><meta data-n-head="ssr" name="msapplication-wide310x150logo" content="/img/favicon/mstile-310x150.png"><meta data-n-head="ssr" name="msapplication-square310x310logo" content="/img/favicon/mstile-310x310.png"><meta data-n-head="ssr" name="description" content="Managing ingress traffic in a Kubernetes cluster is a critical aspect of ensuring the accessibility and security of your applications. This guide will walk you through the process of deploying a Traefik cluster on Kuberntes, including the setup of automatic TLS using Let's Encrypt."><meta data-n-head="ssr" name="title" content="Simplifying Ingress Management for Kubernetes: Deploying a Traefik Cluster with Automatic TLS | Improwised Technology"><meta data-n-head="ssr" property="og:type" content="website"><meta data-n-head="ssr" property="og:url" content="https://www.improwised.com/blog/simplifying-ingress-management-for-kubernetes/"><meta data-n-head="ssr" property="og:title" content="Simplifying Ingress Management for Kubernetes: Deploying a Traefik Cluster with Automatic TLS | Improwised Technology"><meta data-n-head="ssr" property="og:description" content="Managing ingress traffic in a Kubernetes cluster is a critical aspect of ensuring the accessibility and security of your applications. This guide will walk you through the process of deploying a Traefik cluster on Kuberntes, including the setup of automatic TLS using Let's Encrypt. | Improwised Technology"><meta data-n-head="ssr" property="og:image" content="https://www.improwised.com/_nuxt/image/c7d8fb.webp"><meta data-n-head="ssr" property="twitter:card" content="summary"><meta data-n-head="ssr" property="twitter:site" content="@improwised"><meta data-n-head="ssr" property="twitter:creator" content="@improwised"><meta data-n-head="ssr" property="twitter:title" content="Simplifying Ingress Management for Kubernetes: Deploying a Traefik Cluster with Automatic TLS | Improwised Technology"><meta data-n-head="ssr" property="twitter:description" content="Managing ingress traffic in a Kubernetes cluster is a critical aspect of ensuring the accessibility and security of your applications. This guide will walk you through the process of deploying a Traefik cluster on Kuberntes, including the setup of automatic TLS using Let's Encrypt. | Improwised Technology"><meta data-n-head="ssr" property="twitter:image" content="https://www.improwised.com/_nuxt/image/c7d8fb.webp"><link data-n-head="ssr" rel="icon" type="image/x-icon" href="/favicon.ico"><link data-n-head="ssr" href="https://fonts.googleapis.com" rel="preconnect"><link data-n-head="ssr" href="https://maps.googleapis.com" rel="preconnect"><link data-n-head="ssr" href="https://vars.hotjar.com" rel="preconnect"><link data-n-head="ssr" href="https://static.hotjar.com" rel="preconnect"><link data-n-head="ssr" href="https://www.gstatic.com" rel="preconnect"><link data-n-head="ssr" href="https://script.hotjar.com" rel="preconnect"><link data-n-head="ssr" href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i&display=swap" rel="stylesheet" lazyload="true"><link data-n-head="ssr" href="https://fonts.googleapis.com/css?family=Lato:400,400i,700%7CRubik:300,400,500&display=swap" rel="stylesheet" lazyload="true"><link data-n-head="ssr" rel="apple-touch-icon" sizes="57x57" href="/img/favicon/apple-touch-icon-57x57.png"><link data-n-head="ssr" rel="apple-touch-icon" sizes="114x114" href="/img/favicon/apple-touch-icon-114x114.png"><link data-n-head="ssr" rel="apple-touch-icon" sizes="72x72" href="/img/favicon/apple-touch-icon-72x72.png"><link data-n-head="ssr" rel="apple-touch-icon" sizes="144x144" href="/img/favicon/apple-touch-icon-144x144.png"><link data-n-head="ssr" rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon-60x60.png"><link data-n-head="ssr" rel="apple-touch-icon" sizes="120x120" href="/img/favicon/apple-touch-icon-120x120.png"><link data-n-head="ssr" rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon-76x76.png"><link data-n-head="ssr" rel="apple-touch-icon" sizes="152x152" href="/img/favicon/apple-touch-icon-152x152.png"><link data-n-head="ssr" rel="icon" type="image/png" href="/img/favicon/favicon-196x196.png" sizes="196x196"><link data-n-head="ssr" rel="icon" type="image/png" href="/img/favicon/favicon-96x96.png" sizes="96x96"><link data-n-head="ssr" rel="icon" type="image/png" href="/img/favicon/favicon-32x32.png" sizes="32x32"><link data-n-head="ssr" rel="icon" type="image/png" href="/img/favicon/favicon-16x16.png" sizes="16x16"><link data-n-head="ssr" rel="icon" type="image/png" href="/img/favicon/favicon-128.png" sizes="128x128"><link data-n-head="ssr" rel="manifest" href="/manifest.json"><link data-n-head="ssr" rel="canonical" href="https://www.improwised.com/blog/simplifying-ingress-management-for-kubernetes/"><link data-n-head="ssr" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai-sublime.min.css"><script data-n-head="ssr" type="application/ld+json">{"@context":"https://schema.org","@type":"Corporation","name":"Improwised Technologies Pvt. Ltd.","alternateName":"Improwised Technologies","url":"https://www.improwised.com/","logo":"https://www.improwised.com/img/logo.png","sameAs":["https://www.facebook.com/improwised","https://twitter.com/improwised","https://www.linkedin.com/company/improwised-technologies/","https://www.improwised.com/","https://github.com/Improwised/"]}</script><link rel="preload" href="/_nuxt/a5732c5.js" as="script"><link rel="preload" href="/_nuxt/0de514d.js" as="script"><link rel="preload" href="/_nuxt/css/66a9740.css" as="style"><link rel="preload" href="/_nuxt/bb4b8c0.js" as="script"><link rel="preload" href="/_nuxt/64dc675.js" as="script"><link rel="preload" href="/_nuxt/css/495a630.css" as="style"><link rel="preload" href="/_nuxt/0d4ac04.js" as="script"><link rel="preload" href="/_nuxt/css/40fde22.css" as="style"><link rel="preload" href="/_nuxt/f6ff154.js" as="script"><link rel="stylesheet" href="/_nuxt/css/66a9740.css"><link rel="stylesheet" href="/_nuxt/css/495a630.css"><link rel="stylesheet" href="/_nuxt/css/40fde22.css"><link rel="preload" href="/_nuxt/static/1736511208/blog/simplifying-ingress-management-for-kubernetes/state.js" as="script"><link rel="preload" href="/_nuxt/static/1736511208/blog/simplifying-ingress-management-for-kubernetes/payload.js" as="script"><link rel="preload" href="/_nuxt/static/1736511208/manifest.js" as="script">
+  </head>
+  <body>
+    <div data-server-rendered="true" id="__nuxt"><!----><div id="__layout"><div><div><link rel="stylesheet" href="/dist/index.min.css?v=1" lazyload></div> <a id="start" aria-label="start point of page" rel="nofollow" href="javscript:void(0);"></a> <div class="nav-container"><div class="bar bar--sm visible-xs logo-style"><div class="container"><div class="row display_flex"><div class="col col-sm-2 col-md-6 align_self_center"><a href="/"><img src="/_nuxt/image/d4c006.png" alt="Improwised Technologies Pvt Ltd" class="logo logo-dark lazyload"></a></div> <div class="col col-sm-10 col-md-6 text-right align_self_center"><a href="#" data-toggle-class="#menu1;hidden-xs" title="toggle menu for small screen" class="hamburger-toggle"><img src="/_nuxt/image/b7846b.svg" alt="menu" title="menu"></a></div></div></div></div> <nav id="menu1" data-scroll-class="366px:pos-fixed" class="bar bar--sm bar-1 hidden-xs hiddem-sm navigation-style"><div class="container"><div class="row"><div class="col-xs-6 col-md-5 col-sm-3 hidden-xs logo-style"><div class="bar__module"><a href="/"><img src="/_nuxt/image/d4c006.png" alt="Improwised Technologies Pvt Ltd" class="logo logo-dark lazyload"></a></div></div> <div class="col-xs-6 col-md-7 col-sm-9 text-right text-left-xs text-left-sm menu-style"><div class="bar__module"><ul class="menu-horizontal text-left"><li><a href="/">Home</a></li> <li><a href="/about-improwised/">About Us</a></li> <li class="dropdown"><span class="dropdown__trigger">Services</span> <div class="dropdown__container"><div class="container"><div class="row"><div class="dropdown__content col-lg-3 col-md-4 col-sm-6"><ul class="menu-vertical"><li><a href="/services/platform-engineering/">
+                                Platform Engineering 
+                              </a></li><li><a href="/services/cloud-infrastructure-services/">
+                                Cloud Infrastructure Services
+                              </a></li><li><a href="/services/software-product-modernization/">
+                                Product Modernization
+                              </a></li><li><a href="/services/technology-consulting/">
+                                Technology Consulting
+                              </a></li><!----></ul></div></div></div></div></li> <li><a href="/case-studies/">Case Studies</a></li> <li><a href="/careers/">Careers</a></li> <li><a href="/blog/">Blogs</a></li> <li><a href="/contact/">Contact Us</a></li></ul></div></div></div></div></nav></div> <div class="main-container blog-style" data-v-17c3a9c6><section class="space--xs pt-0" data-v-17c3a9c6><div class="container-fluid p-0" data-v-17c3a9c6><div class="row justify-content-center" data-v-17c3a9c6><div class="col-md-12" data-v-17c3a9c6><article data-v-17c3a9c6><div class="position-relative" data-v-17c3a9c6><div class="background-image position-absolute w-100 h-100" data-v-17c3a9c6></div> <div class="container" data-v-17c3a9c6><div class="row"><div class="col-md-6 d-flex align-items-center justify-content-center"><div><h1 class="h2 mb-0">Simplifying Ingress Management for Kubernetes: Deploying a Traefik Cluster with Automatic TLS</h1>
+        Fri, Jan 10, 2025
+      </div></div> <div class="col-md-6 my-5 py-4 d-flex align-items-center justify-content-center"><img src="/_nuxt/image/b179ac.webp" height="400" alt="Simplifying Ingress Management for Kubernetes: Deploying a Traefik Cluster with Automatic TLS | Improwised Technology" decoding="async" class="img-dim" style="color:transparent"></div></div></div></div> <div class="container" data-v-17c3a9c6><div class="blogdesc mt-5" data-v-17c3a9c6><div data-v-17c3a9c6><div data-v-17c3a9c6><p dir="ltr">Managing ingress traffic in a Kubernetes cluster is a critical aspect of ensuring the accessibility and security of your applications. This guide will walk you through the process of deploying a Traefik cluster on Kuberntes, including the setup of automatic TLS using Let's Encrypt.</p></div></div> <div data-v-17c3a9c6><h3 dir="ltr">Prerequisites</h3>
+<p dir="ltr">Before proceeding, ensure you have the following:</p>
+<ul>
+<li dir="ltr" aria-level="1">
+<p dir="ltr" role="presentation">Ensure you have a Kubernetes cluster set up.</p>
+</li>
+<li dir="ltr" aria-level="1">
+<p dir="ltr" role="presentation">Install Helm for package management.</p>
+</li>
+<li dir="ltr" aria-level="1">
+<p dir="ltr" role="presentation">Have a domain name that resolves to the public IP of your Kubernetes cluster.</p>
+</li>
+</ul>
+<p dir="ltr"><img src="/_nuxt/image/0dce84.png" alt="Traefik (2)"></p>
+<h2 dir="ltr">Setting Up the Kubernetes Cluster</h2>
+<p dir="ltr">If you don't already have a Kubernetes cluster, you can set one up using your preferred method (e.g., using Minikube, kind, or any other Kubernetes distribution).</p>
+<h3 dir="ltr">Installing Helm</h3>
+<p dir="ltr">To manage packages in your Kubernetes cluster, you need Helm. Here’s how to install it:</p>
+<pre><code>curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh</code></pre>
+<h3 dir="ltr">Installing Traefik via Helm</h3>
+<p dir="ltr">To install Traefik using Helm, you need to configure the traefik-values.yaml file. Here is an example configuration that includes Let's Encrypt for automatic TLS:</p>
+<pre><code># traefik-values.yaml
+
+logs:
+  general:
+    level: DEBUG
+
+service:
+  type: LoadBalancer
+
+persistence:
+  enabled: true
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: "your@email.com" 
+      storage: "traefik-acme.json"
+      keyType: "RSA4096"
+      tlsChallenge: {}</code></pre>
+<p dir="ltr">You can override the<a href="http://acme.email"> acme.email</a> field directly in the helm install command if needed:</p>
+<pre><code>helm repo add traefik https://helm.traefik.io/traefik
+helm repo update
+helm install traefik traefik/traefik --set acme.email=your@email.com</code></pre>
+<h3 dir="ltr">Configuring DNS for Traefik</h3>
+<p dir="ltr">After installing Traefik, you need to set up a DNS name for the public IP of the Traefik controller.</p>
+<pre><code># Get the public IP of the Traefik service
+PUBLIC_IP=$(kubectl get svc traefik -n kube-system -o jsonpath='{.status.loadBalancer.ingress.hostname}')
+
+# Update the DNS name for the public IP
+DNSNAME=$(az network public-ip show --ids $(kubectl get svc traefik -n kube-system -o jsonpath='{.status.loadBalancer.ingress.hostname}' | cut -d '.' -f 1) --query dnsSettings.fqdn -o tsv)
+echo "DNSNAME: $DNSNAME"</code></pre>
+<h3 dir="ltr">Deploying a Sample Application</h3>
+<p dir="ltr">To demonstrate the functionality of Traefik, you can deploy a sample application. Here is an example of how to deploy the azure-vote-app:</p>
+<pre><code># azure-vote-app.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-vote-back
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azure-vote-back
+  template:
+    metadata:
+      labels:
+        app: azure-vote-back
+    spec:
+      containers:
+      - name: azure-vote-back
+        image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: azure-vote-back
+spec:
+  selector:
+    app: azure-vote-back
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-vote-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azure-vote-front
+  template:
+    metadata:
+      labels:
+        app: azure-vote-front
+    spec:
+      containers:
+      - name: azure-vote-front
+        image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: azure-vote-front
+spec:
+  selector:
+    app: azure-vote-front
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: azure-vote-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls.certresolver: letsencrypt
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  rules:
+  - host: ${DNSNAME}
+    http:
+      paths:
+      - path: /
+        pathType: Exact
+        backend:
+          service:
+            name: azure-vote-front
+            port:
+              number: 80</code></pre>
+<p dir="ltr">Update the host field in the Ingress resource to match your Traefik public IP FQDN:</p>
+<pre><code>sed -i "s/host: &lt;DNSNAME>.&lt;LOCATION>.cloudapp.azure.com/host: ${DNSNAME}/g" azure-vote-app.yaml</code></pre>
+<p dir="ltr">Then, apply the configuration:</p>
+<pre><code>kubectl create ns azure-vote
+kubectl apply -f azure-vote-app.yaml -n azure-vote</code></pre>
+<h3 dir="ltr">Using IngressRoute CRD</h3>
+<p dir="ltr">Traefik also supports the IngressRoute CRD for more advanced routing configurations. Here is an example of how to use it:</p>
+<pre><code># azure-vote-ingressroute.yaml
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: azure-vote-ingressroute
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`${DNSNAME}`)
+      kind: Rule
+      services:
+        - name: azure-vote-front
+          port: 80
+  tls:
+    certResolver: letsencrypt</code></pre>
+<p dir="ltr">Apply the IngressRoute configuration:</p>
+<div dir="ltr" align="left">
+<pre><code>kubectl apply -f azure-vote-ingressroute.yaml -n azure-vote</code></pre>
+<h3 dir="ltr">Middleware Configuration</h3>
+<p dir="ltr">You can also configure middleware using Traefik's CRDs. Here is an example of how to set up a middleware to add security headers:</p>
+<div dir="ltr" align="left">
+<pre><code># azure-vote-middleware.yaml
+
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: test-header
+spec:
+  headers:
+    frameDeny: true
+    browserXssFilter: true
+Apply the middleware configuration:
+kubectl apply -f azure-vote-middleware.yaml -n azure-vote
+Then, reference the middleware in your IngressRoute:
+# Updated azure-vote-ingressroute.yaml
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: azure-vote-ingressroute
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`${DNSNAME}`)
+      kind: Rule
+      middlewares:
+        - name: test-header
+      services:
+        - name: azure-vote-front
+          port: 80
+  tls:
+    certResolver: letsencrypt</code></pre>
+<p><strong> </strong></p>
+<p dir="ltr">When considering high availability in a setup involving multiple instances of Traefik with Let's Encrypt, it is important to note that Let's Encrypt itself does not inherently provide high availability solutions. However, Let's Encrypt does offer robust security features for obtaining and managing TLS certificates.</p>
+<h2 dir="ltr">Limitations with Traefik and Let's Encrypt</h2>
+<p dir="ltr">Using multiple instances of Traefik with Let's Encrypt can be challenging due to the nature of the ACME challenge. Each Traefik instance may attempt to renew the certificate independently, leading to conflicts and overwriting of certificates.</p>
+<p dir="ltr">Here are some recommended approaches to address this issue:</p>
+<h3 dir="ltr">1. Centralized Storage with Shared File System</h3>
+<p dir="ltr">Use a shared file system (e.g., NFS, Ceph, or AWS EFS) that is accessible to all Traefik instances.</p>
+<p dir="ltr">Configure Traefik to use the shared file system as the storage backend for ACME certificates by specifying the acme.json file location.</p>
+<p dir="ltr">Example configuration in traefik.yml:</p>
+<pre><code>certificatesResolvers:
+  letsEncrypt:
+    acme:
+      email: "your-email@example.com"
+      storage: "/shared/acme.json"
+      httpChallenge:
+        entryPoint: "web"</code></pre>
+<p><strong> </strong></p>
+<h3 dir="ltr">2. Use a Distributed Key-Value Store</h3>
+<p dir="ltr">Traefik supports using distributed key-value stores like Consul, Etcd, or Redis to store ACME certificates.</p>
+<p dir="ltr">This ensures that all instances have consistent access to certificate data and can avoid conflicts.</p>
+<p dir="ltr">Example configuration for Consul:</p>
+<pre><code>certificatesResolvers:
+  letsEncrypt:
+    acme:
+      email: "your-email@example.com"
+      storage: "traefik/acme/account"
+      httpChallenge:
+        entryPoint: "web"
+providers:
+  consul:
+    endpoints:
+      - "127.0.0.1:8500"</code></pre>
+<h3 dir="ltr">3. Avoid Simultaneous Renewal Attempts</h3>
+<p dir="ltr">Use a leader-election mechanism (e.g., Kubernetes leader-election or a similar process in other environments) to designate a single Traefik instance as the one responsible for certificate renewal.</p>
+<p dir="ltr">Non-leader instances can still use the certificates but do not attempt renewal.</p>
+<h3 dir="ltr">4. DNS Challenge for Cert Management</h3>
+<p dir="ltr">Consider using the DNS challenge for certificate validation, especially in a multi-instance setup. This approach is stateless and avoids potential conflicts during HTTP challenges.</p>
+<p dir="ltr">Example DNS challenge configuration:</p>
+<pre><code>certificatesResolvers:
+  letsEncrypt:
+    acme:
+      email: "your-email@example.com"
+      storage: "/shared/acme.json"
+      dnsChallenge:
+        provider: "cloudflare"</code></pre>
+<p dir="ltr">By implementing one or more of these strategies, you can ensure smooth certificate management across multiple Traefik instances and avoid the challenges associated with Let's Encrypt's ACME protocol.</p>
+<h3 dir="ltr">Conclusion</h3>
+<p dir="ltr">Deploying Traefik as an ingress controller on Kubernetes with automatic TLS using Let's Encrypt or Cert-Manager simplifies the management of ingress traffic and improves the security of your applications. By following the steps outlined in this guide, you can set up a robust and scalable ingress solution that meets the demands of your Kubernetes workloads.</p>
+</div>
+</div></div></div> <hr data-v-17c3a9c6> <div class="article__share mt-0" data-v-17c3a9c6><h4 data-v-17c3a9c6><span class="text-muted font-20" data-v-17c3a9c6><span data-v-17c3a9c6><span class="badge badge-secondary" data-v-17c3a9c6>
+                        Traefik</span> <span data-v-17c3a9c6></span></span><span data-v-17c3a9c6><span class="badge badge-secondary" data-v-17c3a9c6>
+                        Kubernetes</span> <!----></span></span></h4></div> <hr data-v-17c3a9c6> <div class="article__share mt-0" data-v-17c3a9c6><ul class="social-list list-inline list--hover blog_social" data-v-17c3a9c6><li class="list-inline-item mr-0" data-v-17c3a9c6><a href="javascript:void(0)" class="share-network-email" data-v-17c3a9c6><img src="/_nuxt/image/342f2b.svg" alt="google" title="google" class="pb-1" data-v-17c3a9c6></a></li> <li class="list-inline-item mr-0" data-v-17c3a9c6><a href="javascript:void(0)" class="share-network-linkedin" data-v-17c3a9c6><img src="/_nuxt/image/23608e.svg" alt="linkedin" title="linkedin" class="pb-1" data-v-17c3a9c6></a></li> <li class="list-inline-item mr-0" data-v-17c3a9c6><a href="javascript:void(0)" class="share-network-twitter" data-v-17c3a9c6><img src="/_nuxt/image/2c1470.svg" alt="twitter" title="twitter" class="pb-1" data-v-17c3a9c6></a></li> <li class="list-inline-item mr-0" data-v-17c3a9c6><a href="javascript:void(0)" class="share-network-facebook" data-v-17c3a9c6><img src="/_nuxt/image/36ebdc.svg" alt="facebook" title="facebook" class="pb-1" data-v-17c3a9c6></a></li> <li class="list-inline-item mr-0" data-v-17c3a9c6><a href="javascript:void(0)" class="share-network-whatsapp" data-v-17c3a9c6><img src="/_nuxt/image/90c703.svg" alt="whatsapp" title="whatsapp" class="pb-1" data-v-17c3a9c6></a></li></ul></div></div></article></div></div></div></section> <section class="space--sm services boxed--border bg--secondary" data-v-17c3a9c6><div class="container" data-v-17c3a9c6><div class="row text-center mb-3" data-v-17c3a9c6><div class="col-sm-12" data-v-17c3a9c6><h2 data-v-17c3a9c6>Recent Blogs</h2></div></div> <div class="row" data-v-17c3a9c6><div class="col-lg-4 col-md-6 mb-1" style="cursor:pointer"><article class="feature feature-3 blog-feature boxed boxed--border m-1"><div class="feature__body"><h4><a href="/blog/top-cloud-trends-to-watch-in-2025" class="blog-title text-dark font-weight-normal">Top Cloud Trends to Watch in 2025: Implications for Platform Engineers</a></h4> <p class="pb-5"></p><p>Several major developments will take center stage as 2025 approaches, greatly influencing platform engineering teams. Advances in technologies like artificial intelligence (AI), automation, serverless architectures, and changing business requirements related to cost management, security, and data protection are driving these trends.</p><p></p> <span class="font-14 blog_sub_details_left">Thu, Jan 2, 2025</span></div></article></div><div class="col-lg-4 col-md-6 mb-1" style="cursor:pointer"><article class="feature feature-3 blog-feature boxed boxed--border m-1"><div class="feature__body"><h4><a href="/blog/multi-cloud-strategies-for-2025" class="blog-title text-dark font-weight-normal">The Role of Platform Engineering in Multi-Cloud Strategies for 2025</a></h4> <p class="pb-5"></p><p>As enterprises increasingly adopt multi-cloud strategies to optimize their IT infrastructure, the role of platform engineering becomes crucial. This approach involves using multiple cloud service providers to fulfill various IT needs, and platform engineering is essential for managing and integrating these diverse cloud environments.</p><p></p> <span class="font-14 blog_sub_details_left">Fri, Dec 27, 2024</span></div></article></div><div class="col-lg-4 col-md-6 mb-1" style="cursor:pointer"><article class="feature feature-3 blog-feature boxed boxed--border m-1"><div class="feature__body"><h4><a href="/blog/cloud-cost-optimization-maximizing-profit-scalability" class="blog-title text-dark font-weight-normal">Cloud Cost Optimization: Maximizing Profit and Scalability</a></h4> <p class="pb-5"></p><p>Cloud computing has transformed the way businesses operate, offering unparalleled scalability, flexibility, and accessibility. However, the dynamic nature of cloud services can also lead to unpredictable and escalating costs if not managed properly.</p><p></p> <span class="font-14 blog_sub_details_left">Tue, Dec 24, 2024</span></div></article></div></div></div></section></div> <footer class="footer-3 text-center-xs space--xs bg--dark"><div class="container"><div class="row"><div class="col-sm-6"><img src="/_nuxt/image/36e495.png" width="75" height="27" alt="Improwised Technologies Pvt Ltd" loading="lazy" class="logo lazyload"> <ul class="list-inline list--hover"><li><a href="/contact/"><span>Contact Us</span></a></li> <li><a href="/privacy-policy/"><span>Privacy Policy</span></a></li> <li><a href="/terms-of-use/"><span>Terms Of Use</span></a></li></ul></div> <div class="col-sm-6 text-right text-center-xs"><ul class="social-list list-inline list--hover"><li class="icon-container"><a href="https://www.facebook.com/improwised" title="Improwised Technologies facebook page"><img src="/_nuxt/image/710b89.svg" alt="facebook" title="facebook"></a></li> <li class="icon-container"><a href="https://twitter.com/improwised" title="Improwised Technologies twitter account"><img src="/_nuxt/image/45ad31.svg" alt="twitter" title="twitter"></a></li> <li class="icon-container"><a href="https://www.linkedin.com/company/improwised-technologies/" title="Improwised Technologies linkedin page"><img src="/_nuxt/image/285706.svg" alt="linkedin" title="linkedin"></a></li></ul></div></div> <div class="row"><div class="col-sm-6"><p>Building scalable web application since 2011.</p></div> <div class="col-sm-6 text-right text-center-xs"><span>© <span class="update-year"></span> Improwised Technologies
+          Pvt. Ltd.</span></div></div></div></footer> <div class="p-3 consent d-none"><h3 class="m-0 p-0 h5">Cookies</h3> <div>
+    We use cookies to improve your experience on our website and to analyze
+    site traffic. By continuing to browse our site, you consent to our use of
+    cookies. For more information, please see our
+    <a href="/privacy-policy" class="color--primary-1">privacy policy</a>.
+    <br> <button class="mt-2 consent-button btn btn--primary px-3">
+      Ok I Understand
+    </button></div></div> <a href="#start" data-scroll-class="100vh:active" title="click & go to top of the page" class="back-to-top inner-link"><img src="/_nuxt/image/2b0c17.svg" alt="backToTop" title="backToTop"></a> <script src="/theme/js/jquery-3.1.1.min.js"></script> <script src="/theme/js/scripts.js"></script> <script src="/js/contactus.js"></script></div></div></div><script defer src="/_nuxt/static/1736511208/blog/simplifying-ingress-management-for-kubernetes/state.js"></script><script src="/_nuxt/a5732c5.js" defer></script><script src="/_nuxt/0d4ac04.js" defer></script><script src="/_nuxt/f6ff154.js" defer></script><script src="/_nuxt/0de514d.js" defer></script><script src="/_nuxt/bb4b8c0.js" defer></script><script src="/_nuxt/64dc675.js" defer></script><script data-n-head="ssr" src="https://www.googletagmanager.com/gtag/js?id=G-33PP6GNTHT" data-body="true"></script><script data-n-head="ssr" src="/google-tag.js" data-body="true"></script><script data-n-head="ssr" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" data-body="true"></script><script data-n-head="ssr" src="/js/hljs.js" data-body="true"></script>
+  </body>
+</html>
